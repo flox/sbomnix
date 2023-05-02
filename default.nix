@@ -13,7 +13,7 @@ pythonPackages.buildPythonPackage rec {
 
   src = ./.;
   makeWrapperArgs = [
-    "--prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.nix pkgs.graphviz ]}"
+    "--prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.nix pkgs.graphviz pkgs.curl pkgs.gzip ]}"
   ];
 
   propagatedBuildInputs = [ 
