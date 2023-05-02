@@ -14,7 +14,7 @@ pythonPackages.buildPythonPackage rec {
   src = ./.;
   updateCpedict = import ./scripts/cpedict/update-cpedict.nix { pkgs=pkgs; };
   makeWrapperArgs = [
-    "--prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.nix pkgs.graphviz updateCpedict ]}"
+    "--prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.nix pkgs.graphviz updateCpedict pkgs.curl pkgs.gzip ]}"
   ];
 
   propagatedBuildInputs = [ 
