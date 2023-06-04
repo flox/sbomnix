@@ -11,12 +11,14 @@
 
 import os
 import re
+import sys
 import logging
 import html
 from dataclasses import dataclass
 import pandas as pd
 import graphviz as gv
 
+from sbomnix.nix import find_deriver
 from sbomnix.utils import (
     LOGGER_NAME,
     LOG_SPAM,
@@ -278,16 +280,10 @@ class NixDependencies:
 
     def _parse_buildtime_dependencies(self, nix_path):
         # map nix_path to derivation path by calling nix path-info
-        nix_drv = exec_cmd(
-            [
-                "nix",
-                "--extra-experimental-features",
-                "nix-command",
-                "path-info",
-                "--derivation",
-                nix_path,
-            ]
-        ).strip()
+        nix_drv = find_deriver(nix_path)
+        if not nix_drv:
+            _LOG.fatal(f"Couldn't find deriver for path `{nix_path}`")
+            sys.exit(1)
         _LOG.debug("nix_drv: %s", nix_drv)
         self.start_path = nix_drv
         self.nix_store_path = _get_nix_store_path(self.start_path)
