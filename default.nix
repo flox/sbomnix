@@ -23,6 +23,7 @@ pythonPackages.buildPythonPackage rec {
     pythonPackages.graphviz
     pythonPackages.numpy
     pythonPackages.packageurl-python
+    pythonPackages.packaging
     pythonPackages.pandas
     pythonPackages.requests
     pythonPackages.tabulate
