@@ -288,7 +288,7 @@ def _generate_sbom(target_path, buildtime=False):
     sbomdb = SbomDb(target_path, runtime, buildtime, meta_path=None)
     prefix = "vulnxscan_"
     suffix = ".json"
-    with NamedTemporaryFile(delete=False, prefix=prefix, suffix=suffix) as f:
+    with NamedTemporaryFile(delete=True, prefix=prefix, suffix=suffix) as f:
         sbomdb.to_cdx(f.name, printinfo=False)
         return f.name
 
